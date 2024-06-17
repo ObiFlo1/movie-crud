@@ -1,0 +1,15 @@
+.movieCollection {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 2rem;
+  margin: 50px;
+}
+.carosel-container {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  margin: 30px;
+  list-style-type: none;
+  text-align: center;
+}
