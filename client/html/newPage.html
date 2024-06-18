@@ -10,15 +10,62 @@
   <body>
     <section>
       <div class="add-movie-container">
-        <div>Add A Movie</div>
-        <div class="input-section">
-          <div class="titles">Title</div>
-          <input type="text" class="input" value="" />
-        </div>
-        <button>Add A Movie</button>
+        <div class="moveText"><h3>Add A Movie</h3></div>
+
+        <table class="tableContext">
+          <tr>
+            <td>Title</td>
+            <td><input type="text" id="titleInput" /></td>
+          </tr>
+          <tr>
+            <td>Director</td>
+            <td><input type="text" id="directorInput" /></td>
+          </tr>
+          <tr>
+            <td>Year</td>
+            <td><input type="text" id="yearInput" /></td>
+          </tr>
+          <tr>
+            <td>My Rating</td>
+            <td><input type="text" id="ratingInput" /></td>
+          </tr>
+        </table>
+        <button id="addMovieBtn">Add A Movie</button>
       </div>
     </section>
-    <!-- <script src="../app.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+      document.querySelector("#addMovieBtn").addEventListener("click", () => {
+        // get input values
+        const title = document.querySelector("#titleInput").value;
+        const director = document.querySelector("#directorInput").value;
+        const year = document.querySelector("#yearInput").value;
+        const rating = document.querySelector("#ratingInput").value;
+
+        // create an object of the movie data
+        const movieData = {
+          title: title,
+          director: director,
+          year: year,
+          rating: rating,
+        };
+
+        // send data to server
+        axios
+          .post("http://localhost:8001/add-movie", movieData)
+          .then((response) => {
+            console.log("Movie Added Successfully", response.data);
+            alert("Movie Added Successfully");
+            //redirect to index.thml
+            window.location.href = "index.html";
+          })
+          .catch((error) => {
+            console.error("Error adding movie", error);
+          });
+      });
+    </script>
+
     <script src="../layout.js"></script>
     <script>
       layoutHeader();

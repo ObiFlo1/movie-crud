@@ -13,9 +13,11 @@
   </head>
   <body>
     <section class="index-section">
-      <div>
-        <div>all movies</div>
-        <button>new movie</button>
+      <div class="movieHeader">
+        <h1>All Movies</h1>
+        <button class="btn">
+          <a href="newPage.html">New Movie</a>
+        </button>
       </div>
 
       <table>
@@ -24,26 +26,30 @@
           <th>Director</th>
           <th>Year</th>
           <th>My Rating</th>
+          <th></th>
+          <th></th>
         </tr>
-        <tr>
+        <!-- these should be add w/ js -->
+        <tr id="row1">
           <td>Schizopolis</td>
           <td>Steven Sober</td>
           <td>1973</td>
           <td>4</td>
-          <td><button>Delete Movie</button></td>
-          <td><button>Edit</button></td>
+          <td><button class="btn">Delete Movie</button></td>
+          <td><button class="btn">Edit</button></td>
         </tr>
-        <tr>
+        <!-- these should be add w/ js -->
+        <tr id="row2">
           <td>Schizopolis</td>
           <td>Steven Sober</td>
           <td>1973</td>
           <td>4</td>
-          <td><button>Delete Movie</button></td>
-          <td><button>Edit</button></td>
+          <td><button class="btn">Delete Movie</button></td>
+          <td><button class="btn">Edit</button></td>
         </tr>
       </table>
     </section>
-    <!-- <script src="../app.js"></script> -->
+    <script src="/client/javascript/index.js"></script>
     <script src="../layout.js"></script>
     <script>
       layoutHeader();
