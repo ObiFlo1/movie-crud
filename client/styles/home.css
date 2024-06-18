@@ -5,11 +5,20 @@
   font-size: 2rem;
   margin: 50px;
 }
-.carosel-container {
-  display: flex;
-  gap: 50px;
-  justify-content: center;
-  margin: 30px;
-  list-style-type: none;
-  text-align: center;
+
+.swiper-container .swiper {
+  width: 600px;
+  height: 300px;
+}
+
+.swiper-slide {
+  margin: 0px;
+}
+
+.swiper-wrapper {
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  display: block !important; /* Override display: none; */
 }
