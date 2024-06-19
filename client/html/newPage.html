@@ -55,7 +55,7 @@
         axios
           .post("http://localhost:8001/add-movie", movieData)
           .then((response) => {
-            console.log("Movie Added Successfully", response.data);
+            console.log("Movie Added Successfully: newpage.html");
             alert("Movie Added Successfully");
             //redirect to index.thml
             window.location.href = "index.html";

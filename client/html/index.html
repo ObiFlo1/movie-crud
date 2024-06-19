@@ -30,26 +30,88 @@
           <th></th>
         </tr>
         <!-- these should be add w/ js -->
-        <tr id="row1">
-          <td>Schizopolis</td>
-          <td>Steven Sober</td>
-          <td>1973</td>
-          <td>4</td>
-          <td><button class="btn">Delete Movie</button></td>
-          <td><button class="btn">Edit</button></td>
+       
         </tr>
-        <!-- these should be add w/ js -->
-        <tr id="row2">
-          <td>Schizopolis</td>
-          <td>Steven Sober</td>
-          <td>1973</td>
-          <td>4</td>
-          <td><button class="btn">Delete Movie</button></td>
-          <td><button class="btn">Edit</button></td>
-        </tr>
+        <tr id="movieList"></tr>
       </table>
     </section>
-    <script src="/client/javascript/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      // When GETTING info, use a async function
+      async function fetchData() {
+        try {
+          const response = await fetch("http://localhost:8001/get-movie");
+          if (!response.ok) {
+            throw new Error(`HTTP error. Status ${response.status}`);
+          }
+          const data = await response.json();
+          //debugging: log the recieved data
+          console.log("Recieved Data:", data);
+          console.log(data[0].title);
+
+          if (!Array.isArray(data)) {
+            throw new TypeError("Expeced an array but recieved" + typeof data);
+          }
+
+          //display movies on the page
+          const movieListDiv = document.querySelector("#movieList");
+          movieListDiv.innerHTML = ""; // clear previous content
+          const table = document.querySelector("table");
+
+          data.forEach((movie) => {
+            console.log(movie);
+            const row = document.createElement("tr");
+            //create cells for movie details
+            const titleCell = document.createElement("td");
+            titleCell.textContent = movie.title;
+            row.appendChild(titleCell);
+            //
+            const directorCell = document.createElement("td");
+            directorCell.textContent = movie.director;
+            row.appendChild(directorCell);
+            //
+            const yearCell = document.createElement("td");
+            yearCell.textContent = movie.year;
+            row.appendChild(yearCell);
+            //
+            const ratingCell = document.createElement("td");
+            ratingCell.textContent = movie.rating;
+            row.appendChild(ratingCell);
+            // create delete button
+            const deleteCell = document.createElement("td");
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete Movie";
+            deleteButton.classList.add("btn");
+            deleteButton.addEventListener("click", (e) => {
+              // handle delete function
+              const movieRow = e.target.closest("tr");
+              if (movieRow) {
+                movieRow.remove();
+              }
+            });
+            deleteCell.appendChild(deleteButton);
+            row.appendChild(deleteCell);
+
+            //create edit button
+            const editCell = document.createElement("td");
+            const editButton = document.createElement("button");
+            editButton.textContent = "Edit";
+            editButton.classList.add("btn");
+            editButton.addEventListener("click", (e) => {
+              // handle edit function
+            });
+            editCell.appendChild(editButton);
+            row.appendChild(editCell);
+            table.appendChild(row);
+          });
+
+          // catch errors
+        } catch (error) {
+          console.error("Error fetching movies from localhost:8001", error);
+        }
+      }
+      fetchData();
+    </script>
     <script src="../layout.js"></script>
     <script>
       layoutHeader();

@@ -5,13 +5,14 @@ const port = 8001;
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.json());
 
 //remember the client has to use the http://localhost:8001/get
 let movies = []; //example of keeping storage instead of creating a db
 
 app.get("/get-movie", (req, res) => {
   //what info are we going to send the client
-  res.json("placeholder for the crud");
+  res.json(movies);
 });
 
 // for post request, the client sends the info to what end point? the local host : / post?
@@ -21,9 +22,11 @@ app.post("/add-movie", (req, res) => {
   const clientsData = req.body;
   // we have it stored in the variable, but where do we send it after
   movies.push(clientsData);
-  console.log("Movie added:", clientsData);
-  res.status(200).send("Movie added to server memory successfully");
+  console.log("Movie added:", movies);
+  res.json({ message: "From crud.js: Movie added successfully" });
 });
+
+console.log(movies);
 
 // same question for updating.. do i need a database i think its a must in this situation. In react, i just saved in in the state memory
 //idk what end point to send this too . and do the post and put request also take arguments of req, res ?
